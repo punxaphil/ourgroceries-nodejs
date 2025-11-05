@@ -1,0 +1,70 @@
+{
+  "name": "ourgroceries",
+  "version": "0.0.0",
+  "description": "Unofficial Node.js wrapper for the Our Groceries API",
+  "type": "module",
+  "source": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "npm run build && vitest run && npm run lint && npm run format:check",
+    "test:watch": "vitest",
+    "example:minimal": "tsx --env-file=.env examples/minimal-usage.ts",
+    "example:readonly": "OG_READONLY=true tsx --env-file=.env examples/basic-usage.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  },
+  "keywords": [
+    "ourgroceries",
+    "groceries",
+    "shopping",
+    "list",
+    "api",
+    "unofficial"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.8.1"
+  },
+  "dependencies": {
+    "got": "14.6.2",
+    "tough-cookie": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "@types/tough-cookie": "4.0.5",
+    "@typescript-eslint/eslint-plugin": "8.46.3",
+    "@typescript-eslint/parser": "8.46.3",
+    "eslint": "9.39.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-no-relative-import-paths": "1.6.1",
+    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-promise": "7.2.1",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.3",
+    "tsx": "4.20.6",
+    "vitest": "4.0.7",
+    "semantic-release": "24.1.3",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/npm": "12.0.2",
+    "@semantic-release/github": "11.0.6",
+    "@semantic-release/commit-analyzer": "13.0.1",
+    "@semantic-release/release-notes-generator": "14.1.0"
+  }
+}

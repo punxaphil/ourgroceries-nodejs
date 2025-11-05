@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run semantic-release in dry-run mode (no publish)'
+        required: false
+        default: 'false'
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # semantic-release needs full history for proper analysis
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "Executing semantic-release in dry-run mode"
+            npx --yes semantic-release --dry-run
+          else
+            npx --yes semantic-release
+          fi
+
+      - name: Post-release summary
+        if: always()
+        run: |
+          echo "Release workflow finished with conclusion: ${{ job.status }}"
+          if [ -f CHANGELOG.md ]; then
+            echo "Top of CHANGELOG.md:"
+            head -n 30 CHANGELOG.md || true
+          fi
