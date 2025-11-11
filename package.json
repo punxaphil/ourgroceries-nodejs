@@ -58,7 +58,7 @@
     "typescript": "5.9.3",
     "typescript-eslint": "8.46.3",
     "tsx": "4.20.6",
-    "vitest": "4.0.7",
+    "vitest": "4.0.8",
     "semantic-release": "24.1.3",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
