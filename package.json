@@ -1,6 +1,6 @@
 {
   "name": "ourgroceries",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Unofficial Node.js wrapper for the Our Groceries API",
   "type": "module",
   "source": "src/index.ts",
