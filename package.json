@@ -44,7 +44,7 @@
     "tough-cookie": "6.0.0"
   },
   "devDependencies": {
-    "@types/node": "24.10.0",
+    "@types/node": "24.10.1",
     "@types/tough-cookie": "4.0.5",
     "@typescript-eslint/eslint-plugin": "8.46.3",
     "@typescript-eslint/parser": "8.46.4",
